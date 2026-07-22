@@ -1,0 +1,5 @@
+# The databases are attached to releases, not tracked in git.
+*.tar.gz
+*_seq.txt
+*_eui.txt
+.DS_Store
