@@ -6,7 +6,7 @@ several studies so that each one measures on exactly the same data.
 The sequence structure comes from the public [SPMF](https://www.philippe-fournier-viger.com/spmf/)
 datasets, which carry no utilities. Internal quantities and external profits are generated
 by `SPMF_Converter`, distributed with
-[rhuspm-miner](https://github.com/tran-minh-thai/rhuspm-miner).
+[convert-spmf-to-quantitative](https://github.com/tran-minh-thai/convert-spmf-to-quantitative).
 
 ## Getting the data
 
@@ -14,7 +14,7 @@ The databases are attached to a release rather than tracked in git, so cloning t
 repository stays fast and updating the data does not grow its history.
 
 ```bash
-VERSION=v1-seed42-lognormal
+VERSION=v1.1-seed42-lognormal
 curl -fLO https://github.com/tran-minh-thai/huspm-datasets/releases/download/$VERSION/huspm-datasets-$VERSION.tar.gz
 tar xzf huspm-datasets-$VERSION.tar.gz
 shasum -a 256 -c MANIFEST.sha256        # Linux: sha256sum -c MANIFEST.sha256
@@ -24,7 +24,7 @@ Each release is named after the parameters that produced it. A study needing a d
 seed or a different utility distribution pins a different release instead of overwriting
 this one, so results published against an older release stay reproducible.
 
-## Contents of `v1-seed42-lognormal`
+## Contents of `v1.1-seed42-lognormal`
 
 Two files per dataset: `NAME_seq.txt` holds the sequences with quantities, `NAME_eui.txt`
 holds one profit per item.
@@ -38,10 +38,19 @@ holds one profit per item.
 | C8T1S5I8N5K | 47,133 | 68,240 | 18.83 | 7.97 | 47,416,411 |
 | BMS1 | 59,601 | 497 | 2.51 | 1.00 | 7,229,030 |
 | KOSARAK | 990,002 | 41,270 | 8.10 | 1.00 | 385,921,994 |
+| ONLINE_RETAIL_II_ALL | 4,383 | 41,431 | 122.06 | 22.78 | 29,545,643 |
 
-Note the items-per-event column: in six of the seven datasets every event holds a single
-item, which is the usual shape of SPMF sequence data. Algorithms that distinguish
-within-event from across-event extensions are exercised only by C8T1S5I8N5K here.
+Note the items-per-event column: in six of the eight datasets every event holds a single
+item, which is the usual shape of SPMF sequence data. Only C8T1S5I8N5K and
+ONLINE_RETAIL_II_ALL exercise algorithms that distinguish within-event from across-event
+extensions, and they do so from opposite directions: C8T1S5I8N5K is synthetic with events of
+five to ten items, while ONLINE_RETAIL_II_ALL is real retail with baskets averaging 22.78
+items over sequences of only about five events. A suite drawn from the other six measures
+across-event extension alone.
+
+`v1.1` adds ONLINE_RETAIL_II_ALL and changes nothing else: the fourteen files of `v1` are
+byte-identical in both releases, so a study pinned to `v1` can move to `v1.1` without
+remeasuring.
 
 ## Generation parameters
 
@@ -53,9 +62,18 @@ within-event from across-event extensions are exercised only by C8T1S5I8N5K here
 
 ## Rebuilding instead of downloading
 
-The conversion is deterministic. Its generator is seeded per input file rather than shared
-across a batch, so a given raw file converts to the same bytes on any machine, whether it is
-converted alone or alongside others. Download the raw files from SPMF, then:
+The conversion is deterministic **provided the generator is seeded per input file rather than
+shared across a batch**. With per-file seeding a given raw file converts to the same bytes on
+any machine, whether it is converted alone or alongside others; with one generator shared
+across the batch, the output depends on which files were converted and in what order, and the
+checksums below will not match.
+
+These releases were produced with the per-file version. Check before rebuilding: the converter
+must create its `Random` inside the per-file routine, not hold it as a static field, and the
+`_eui` header it writes must read `# itemID:profit, log-normal, seed 42`. A copy that writes a
+different header is a different version and will not reproduce these bytes.
+
+Download the raw files from SPMF, then:
 
 ```bash
 java -cp out SPMF_Converter          # expects the raw .txt files in datasets/
