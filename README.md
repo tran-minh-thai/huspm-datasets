@@ -83,6 +83,40 @@ shasum -a 256 -c MANIFEST.sha256
 This is the fallback when the release is unreachable, and it is also how these files can be
 audited rather than taken on trust.
 
+## Converting a dataset of your own
+
+The converter is
+[convert-spmf-to-quantitative](https://github.com/tran-minh-thai/convert-spmf-to-quantitative).
+Any SPMF sequence file can be turned into a quantitative database with it, and a study that
+follows the four points below is reproducible in the same way these releases are.
+
+```bash
+git clone https://github.com/tran-minh-thai/convert-spmf-to-quantitative
+cd convert-spmf-to-quantitative
+javac -encoding UTF-8 -d out src/SPMF_Converter.java
+java -cp out SPMF_Converter YOUR_DATASET.txt      # raw file in datasets/
+```
+
+**1. Seed the generator per file, not per batch.** This is the whole of what makes the output
+reproducible. With one generator shared across a run, the bytes a file receives depend on
+which other files were converted before it, and that ordering is not recorded anywhere.
+
+**2. Record checksums next to whatever consumes the data.** A manifest of SHA-256 sums,
+committed in the study that uses the files, is what pins the version. Without it a later
+change to the shared data silently produces numbers that no longer match what was published.
+
+**3. Name the release after the parameters that produced it,** not after a version counter.
+`v1.1-seed42-lognormal` says what is inside; `v2` does not. A study needing a different seed
+or distribution then pins a different release rather than overwriting one that published
+results depend on.
+
+**4. State the generation parameters in the paper,** not only in the repository: seed, the
+distribution of internal quantities, and the distribution of external profits. They are what
+another group needs in order to build an equivalent dataset from scratch.
+
+Datasets converted this way are welcome here. Open an issue with the raw SPMF file name and
+the checksums produced, and they can go into a following release.
+
 The raw SPMF files are not redistributed here; download them from SPMF directly.
 
 ## File format
