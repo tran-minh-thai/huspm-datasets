@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use these datasets, please cite them using the metadata below."
+type: dataset
+title: "huspm-datasets: quantitative sequence databases for high-utility sequential pattern mining"
+abstract: >
+  Quantitative sequence databases used across several high-utility sequential
+  pattern mining studies, so that each measures on exactly the same bytes. The
+  sequence structure comes from the public SPMF datasets, which carry no
+  utilities; internal quantities and external profits are generated
+  deterministically by SPMF_Converter with a fixed seed and a per-file random
+  stream, so a given raw file converts to the same bytes regardless of what else
+  is converted alongside it. Each release ships a tarball and a SHA-256 manifest
+  so a study can pin the exact data it measured on.
+authors:
+  - family-names: "Tran"
+    given-names: "Thai"
+    email: "thaitm@huflit.edu.vn"
+    orcid: "https://orcid.org/0000-0002-7671-4785"
+    affiliation: "Faculty of Information Technology, Ho Chi Minh City University of Foreign Languages - Information Technology"
+    city: "Ho Chi Minh City"
+    country: "VN"
+keywords:
+  - high-utility sequential pattern mining
+  - quantitative sequence database
+  - benchmark data
+  - SPMF
+license: CC-BY-4.0
+version: "1.1.1"
+date-released: "2026-08-07"
+repository-code: "https://github.com/tran-minh-thai/huspm-datasets"

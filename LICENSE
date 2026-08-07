@@ -1,0 +1,23 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+WHAT THIS COVERS
+
+This licence covers the parts of this repository that originate here: the generated
+internal quantities and external profits, the per-dataset parameter choices, the
+SHA-256 manifests, and the selection and arrangement of the released collection.
+
+WHAT IT DOES NOT COVER
+
+The underlying sequence structure comes from the public SPMF dataset collection
+(https://www.philippe-fournier-viger.com/spmf/) and is redistributed here unchanged
+in its ordering and item identities. Rights in that material remain with its
+original holders; this licence grants nothing over it.
+
+ATTRIBUTION
+
+Reusers must credit both this repository and the SPMF collection it derives from.
+
+FULL TEXT
+
+The complete licence text is at https://creativecommons.org/licenses/by/4.0/legalcode
+and a readable summary at https://creativecommons.org/licenses/by/4.0/

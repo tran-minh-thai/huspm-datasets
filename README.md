@@ -8,6 +8,14 @@ datasets, which carry no utilities. Internal quantities and external profits are
 by `SPMF_Converter`, distributed with
 [convert-spmf-to-quantitative](https://github.com/tran-minh-thai/convert-spmf-to-quantitative).
 
+## Licence and attribution
+
+The generated utilities, the parameter choices, the manifests and the arrangement of the
+released collection are licensed CC BY 4.0. The underlying sequence structure comes from the
+public [SPMF](https://www.philippe-fournier-viger.com/spmf/) collection and is redistributed
+unchanged; rights in that material stay with its original holders. Reusers should credit both.
+See `LICENSE` and `CITATION.cff`.
+
 ## Getting the data
 
 The databases are attached to a release rather than tracked in git, so cloning this
