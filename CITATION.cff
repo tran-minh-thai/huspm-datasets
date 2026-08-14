@@ -25,6 +25,6 @@ keywords:
   - benchmark data
   - SPMF
 license: CC-BY-4.0
-version: "1.1.1"
+version: "1.2.0"
 date-released: "2026-08-07"
 repository-code: "https://github.com/tran-minh-thai/huspm-datasets"
