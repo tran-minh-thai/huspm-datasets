@@ -23,6 +23,12 @@ Take `MANIFEST.sha256` from the **release you fetched**, not from this branch. T
 every file added since as missing. Each release from `v1` onwards carries its own manifest
 as an asset.
 
+Between `v1.2` and this commit the copy on `main` carried two stale hashes for
+`ONLINE_RETAIL_II_QTY` that matched no release, so verifying correct data against it reported
+two spurious failures. Now corrected. The release assets were never affected: if a check
+against `main` ever disagrees with a check against the release asset, the release asset is
+right.
+
 ## Licence and attribution
 
 The generated utilities, the parameter choices, the manifests and the arrangement of the
@@ -47,7 +53,7 @@ Each release is named after the parameters that produced it. A study needing a d
 seed or a different utility distribution pins a different release instead of overwriting
 this one, so results published against an older release stay reproducible.
 
-## Contents of `v1.1-seed42-lognormal`
+## Contents of `v1.2.1-measured-quantity`
 
 Two files per dataset: `NAME_seq.txt` holds the sequences with quantities, `NAME_eui.txt`
 holds one profit per item.
@@ -62,14 +68,25 @@ holds one profit per item.
 | BMS1 | 59,601 | 497 | 2.51 | 1.00 | 7,229,030 |
 | KOSARAK | 990,002 | 41,270 | 8.10 | 1.00 | 385,921,994 |
 | ONLINE_RETAIL_II_ALL | 4,383 | 41,431 | 122.06 | 22.78 | 29,545,643 |
+| ONLINE_RETAIL_II_QTY | 5,767 | 4,631 | 139.66 | 1.00 | 19,677,989 |
 
-Note the items-per-event column: in six of the eight datasets every event holds a single
+Note the items-per-event column: in seven of the nine datasets every event holds a single
 item, which is the usual shape of SPMF sequence data. Only C8T1S5I8N5K and
 ONLINE_RETAIL_II_ALL exercise algorithms that distinguish within-event from across-event
 extensions, and they do so from opposite directions: C8T1S5I8N5K is synthetic with events of
 five to ten items, while ONLINE_RETAIL_II_ALL is real retail with baskets averaging 22.78
-items over sequences of only about five events. A suite drawn from the other six measures
+items over sequences of only about five events. A suite drawn from the other seven measures
 across-event extension alone.
+
+`ONLINE_RETAIL_II_QTY` needs a warning rather than a description. It gives each invoice line
+its own event, so its sequences average 139.66 events and reach 12,890 at the longest, an
+order of magnitude past anything else here. Utility-based pruning loosens badly at that
+length: measured on its first half, every threshold that completes returns no patterns and
+every threshold low enough to return one exceeds three billion candidates, the two bracketing
+0.15 and 0.16. Rebuilding it per customer-month cuts the sequences to 32.28 events and makes
+the last computable threshold six hundred times cheaper, and it still returns nothing. The
+database is kept because the data is sound and the effect is worth knowing, not because it is
+a usable benchmark.
 
 `v1.1` adds ONLINE_RETAIL_II_ALL and changes nothing else: the fourteen files of `v1` are
 byte-identical in both releases, so a study pinned to `v1` can move to `v1.1` without
