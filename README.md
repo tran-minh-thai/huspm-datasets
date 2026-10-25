@@ -109,12 +109,13 @@ A study that converts its own data stays reproducible if it:
 
 ## Earlier releases
 
-Releases before `v2.0.0-utilities` attach the complete databases, in the format above. They are
-named after the parameters that produced them. Each of `v1-seed42-lognormal` to
-`v1.2.1-measured-quantity` holds the seven databases above, and `v2.0.0-utilities` reproduces all 14
-files byte for byte. `v1.1` added `ONLINE_RETAIL_II_ALL`, and `v1.2.1-measured-quantity` added
-`ONLINE_RETAIL_II_QTY`; both are built from
-[UCI Online Retail II](https://archive.ics.uci.edu/dataset/502/online+retail+ii) (CC BY 4.0).
+Releases `v1-seed42-lognormal` to `v1.2.1-measured-quantity` attached the complete databases,
+SPMF sequences included. Their archives have been withdrawn; each release keeps its
+`MANIFEST.sha256`, and `v2.0.0-utilities` reproduces the 14 files of the seven SPMF databases byte
+for byte, so a study pinned to one of them can assemble the same bytes and check them against that
+manifest. `ONLINE_RETAIL_II_ALL` and `ONLINE_RETAIL_II_QTY`, built from
+[UCI Online Retail II](https://archive.ics.uci.edu/dataset/502/online+retail+ii) (CC BY 4.0), are
+attached as separate files to `v1.2.1-measured-quantity`.
 
 ## Licence and attribution
 
