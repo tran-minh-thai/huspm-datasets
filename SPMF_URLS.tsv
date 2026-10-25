@@ -1,0 +1,8 @@
+# name	address of the SPMF sequence file it is assembled from
+SIGN	https://www.philippe-fournier-viger.com/spmf/publicdatasets/SIGN.txt
+LEVIATHAN	https://www.philippe-fournier-viger.com/spmf/publicdatasets/LEVIATHAN.txt
+FIFA	https://www.philippe-fournier-viger.com/spmf/publicdatasets/FIFA.txt
+BIBLE	https://www.philippe-fournier-viger.com/spmf/publicdatasets/BIBLE.txt
+C8T1S5I8N5K	https://www.philippe-fournier-viger.com/spmf/publicdatasets/data.slen_8.tlen_1.seq.patlen_5.lit.patlen_8.nitems_5000_spmf.txt
+BMS1	https://www.philippe-fournier-viger.com/spmf/publicdatasets/BMS1_spmf.txt
+KOSARAK	https://www.philippe-fournier-viger.com/spmf/publicdatasets/kosarak_sequences.txt

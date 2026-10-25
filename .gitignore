@@ -3,3 +3,5 @@
 *_seq.txt
 *_eui.txt
 .DS_Store
+*_qty.txt
+__pycache__/
