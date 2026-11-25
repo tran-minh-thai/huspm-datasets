@@ -117,9 +117,31 @@ move to `v2.0.0-utilities` and still check the files against its old `MANIFEST.s
 both built from [UCI Online Retail II](https://archive.ics.uci.edu/dataset/502/online+retail+ii)
 (CC BY 4.0); `v1.2.1-measured-quantity` also attaches the two as separate files.
 
+## ONLINERETAIL: Online Retail II replayed by day
+
+Release `v2.1.0-onlineretail` adds `ONLINERETAIL`, built from
+[UCI Online Retail II](https://archive.ics.uci.edu/dataset/502/online+retail+ii) (Chen, D. (2012).
+Online Retail II [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5CG6D;
+CC BY 4.0) by `onlineretail/build_onlineretail.py`, which needs Python 3 and nothing else and is
+deterministic. A sequence is one customer in one calendar month and an element one invoice; every
+item occurrence has internal utility 1 and an item's external utility is the median unit price of
+its purchase lines. `ONLINERETAIL_seq.txt` is the database of December 2009 to November 2010;
+`ONLINERETAIL_ops.txt` replays the rest of the log by day as insertions, modifications and
+deletions, with the cancellations of the log applied to the purchases they cancel, and
+`ONLINERETAIL_ops_nocancel.txt` the same log with those cancellations ignored. The docstring of the
+script gives every rule; `ONLINERETAIL_build.json` the counts of the build. The release attaches
+the built files, which CC BY 4.0 allows with the credit above; `onlineretail/SOURCE.sha256` pins the
+UCI file and `onlineretail/ONLINERETAIL.sha256` every file the script writes.
+
+```bash
+python onlineretail/build_onlineretail.py --xlsx online_retail_II.xlsx --out-dir databases
+cd databases && sha256sum -c ../onlineretail/ONLINERETAIL.sha256
+```
+
 ## Licence and attribution
 
 CC BY 4.0 for what originates here: the generated quantities and profits, the parameter choices,
 the checksums, the scripts, and the arrangement of the collection. See `LICENSE` and
 `CITATION.cff`. The SPMF sequences are not distributed here, and the rights in them stay with their
-original holders. Reusers should credit both this repository and SPMF.
+original holders. Reusers should credit both this repository and SPMF. ONLINERETAIL is derived
+from UCI Online Retail II (CC BY 4.0); reusers of it should credit Chen (2012) as above.
