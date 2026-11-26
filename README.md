@@ -126,9 +126,11 @@ CC BY 4.0) by `onlineretail/build_onlineretail.py`, which needs Python 3 and not
 deterministic. A sequence is one customer in one calendar month and an element one invoice; every
 item occurrence has internal utility 1 and an item's external utility is the median unit price of
 its purchase lines. `ONLINERETAIL_seq.txt` is the database of December 2009 to November 2010;
-`ONLINERETAIL_ops.txt` replays the rest of the log by day as insertions, modifications and
-deletions, with the cancellations of the log applied to the purchases they cancel, and
-`ONLINERETAIL_ops_nocancel.txt` the same log with those cancellations ignored. The docstring of the
+`ONLINERETAIL_ops.txt` replays the log by day up to 2011-09-30 as insertions, modifications and
+deletions in a window of twelve months: the cancellations of the log are applied to the purchases
+they cancel, and on the first day of each month the customer-months older than twelve months are
+deleted. `ONLINERETAIL_ops_nocancel.txt` is the same log with the cancellations ignored, and
+`ONLINERETAIL_ops_insertonly.txt` with the cancellations and the expiry ignored. The docstring of the
 script gives every rule; `ONLINERETAIL_build.json` the counts of the build. The release attaches
 the built files, which CC BY 4.0 allows with the credit above; `onlineretail/SOURCE.sha256` pins the
 UCI file and `onlineretail/ONLINERETAIL.sha256` every file the script writes.
